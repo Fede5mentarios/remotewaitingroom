@@ -1,6 +1,5 @@
 package com.federico.d.bernst.provider.generic
 
-import provider.generic.Entidad
 import java.io.Serializable
 import java.util.*
 import javax.persistence.EntityManager

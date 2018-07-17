@@ -1,19 +1,17 @@
 package com.federico.d.bernst.controller.service
 
-import com.federico.d.bernst.model.Usuario
+import com.federico.d.bernst.controller.response.AuthResponse
+import com.federico.d.bernst.excepcion.FailAuthException
 import com.federico.d.bernst.provider.UsuarioDAO
-import controller.response.LoginResultResponse
-import java.util.*
+import com.federico.d.bernst.security.JWTAuthClass
 import javax.inject.Inject
 
 
-class LoginServiceImpl @Inject constructor(val usuarioDAO: UsuarioDAO) : LoginService {
+class LoginServiceImpl @Inject constructor(val usuarioDAO: UsuarioDAO, val JWTAuthClass: JWTAuthClass) : LoginService {
 
-    override fun authToken(userName: String, password: String): LoginResultResponse {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun login(username: String, password: String) = getUsuario(username, password)
+            .map { AuthResponse(JWTAuthClass.sign(it.userName)) }
+            .orElseThrow { throw FailAuthException("Invalid credentials") }
 
-    override fun getUsuario(userName: String?, token: String?): Optional<Usuario> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    fun getUsuario(userName: String, password: String) = usuarioDAO.findByUsernameAndPassword(userName, password)
 }

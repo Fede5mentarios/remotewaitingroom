@@ -1,10 +1,9 @@
 package com.federico.d.bernst.provider.generic
 
-import provider.generic.Entidad
 import java.io.Serializable
 import java.util.*
 
-interface GenericDAO<T: Entidad<ID>, ID : Serializable> {
+interface GenericDAO<T : Entidad<ID>, ID : Serializable> {
     fun findById(id: ID): Optional<T>
     fun findAll(): MutableList<T>
     fun saveOrUpdate(entity: T): T

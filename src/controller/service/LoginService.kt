@@ -1,12 +1,7 @@
 package com.federico.d.bernst.controller.service
 
-import controller.response.LoginResultResponse
-import com.federico.d.bernst.model.Usuario
-import java.util.*
+import com.federico.d.bernst.controller.response.AuthResponse
 
 interface LoginService {
-
-    fun authToken(userName: String, password: String): LoginResultResponse
-    fun getUsuario(userName: String?, token: String?): Optional<Usuario>
-
+    fun login(username: String, password: String): AuthResponse
 }

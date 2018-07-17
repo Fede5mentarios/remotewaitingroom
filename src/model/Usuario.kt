@@ -1,6 +1,6 @@
 package com.federico.d.bernst.model
 
-import provider.generic.Entidad
+import com.federico.d.bernst.provider.generic.Entidad
 import javax.persistence.*
 
 @Entity

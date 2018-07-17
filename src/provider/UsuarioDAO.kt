@@ -7,4 +7,5 @@ import java.util.*
 interface UsuarioDAO : GenericDAO<Usuario,Long>{
 
     fun findByUsername(username:String):Optional<Usuario>
+    fun findByUsernameAndPassword(username: String, pass: String): Optional<Usuario>
 }

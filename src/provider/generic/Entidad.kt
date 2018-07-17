@@ -1,4 +1,4 @@
-package provider.generic
+package com.federico.d.bernst.provider.generic
 
 import java.io.Serializable
 
