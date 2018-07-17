@@ -1,13 +1,14 @@
 package com.federico.d.bernst.model
 
-import java.sql.Date
+import provider.generic.Entidad
+import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(schema = "public")
-data class Sala (
-        @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) val id: Long,
-        @OneToOne val empresa: Empresa?,
-        val url: String, val habilitado: Boolean,
-        val cantidad: Int, val promedioMS: Long,
-        @Temporal(TemporalType.TIME) val fechaCreacion: Date)
+@Table
+data class Sala(
+        @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) override val id: Long = -1,
+        @ManyToOne val empresa: Empresa = Empresa(),
+        val url: String = "sin URL", val habilitado: Boolean = true,
+        val cantidad: Int = -1, val promedioMS: Long = 0,
+        @Temporal(TemporalType.TIMESTAMP) val fechaCreacion: Calendar?) : Entidad<Long>

@@ -21,6 +21,6 @@ class PersistenceModule {
         return configuration.buildSessionFactory(builder.build())
     }
 
-    @Provides
-    public fun provideEmplesaDAO(sessionFactory: SessionFactory): EmpresaDAO = EmpresaDAOImpl(sessionFactory)
+//    @Provides
+//    public fun provideEmplesaDAO(sessionFactory: SessionFactory): EmpresaDAO = EmpresaDAOImpl(sessionFactory)
 }

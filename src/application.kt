@@ -1,7 +1,9 @@
 package com.federico.d.bernst
 
 import com.federico.d.bernst.controller.homeContoller
+import com.federico.d.bernst.controller.loginContoller
 import com.federico.d.bernst.controller.service.HomeService
+import com.federico.d.bernst.controller.service.LoginService
 import com.federico.d.bernst.koin.persistenseModule
 import com.federico.d.bernst.koin.serviceModule
 import com.federico.d.bernst.view.homeView
@@ -12,6 +14,8 @@ import io.ktor.auth.Authentication
 import io.ktor.content.resources
 import io.ktor.content.static
 import io.ktor.features.CallLogging
+import io.ktor.features.ContentNegotiation
+import io.ktor.gson.gson
 import io.ktor.http.ContentType
 import io.ktor.response.respondText
 import io.ktor.routing.routing
@@ -29,16 +33,22 @@ fun Application.module() {
     //	Features
     install(Authentication) {}
     install(CallLogging)
-
+    install(ContentNegotiation) {
+        gson {
+            // Configure Gson here
+        }
+    }
     startKoin(listOf(persistenseModule, serviceModule))
 
     val homeService: HomeService by inject()
+    val loginService: LoginService by inject()
     routing {
         //	UI
         homeView()
 
         //	APIs
         homeContoller(homeService)
+        loginContoller(loginService)
 
         // Static feature. Try to access `/static/ktor_logo.svg`
         static("/static") {

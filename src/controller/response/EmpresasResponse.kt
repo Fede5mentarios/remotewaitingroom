@@ -1,3 +1,5 @@
 package com.federico.d.bernst.controller.response
 
-data class EmpresasResponse(val empresas: List<String>)
+import java.io.Serializable
+
+data class EmpresasResponse(val empresas: List<String>): Serializable

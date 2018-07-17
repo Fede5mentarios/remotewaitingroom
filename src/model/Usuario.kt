@@ -1,10 +1,10 @@
 package com.federico.d.bernst.model
 
+import provider.generic.Entidad
 import javax.persistence.*
 
 @Entity
-@Table(schema = "public")
+@Table
 data class Usuario (
-        @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) val id: Long,
-        val userName: String, val password: String,
-        @OneToOne val empresa: Empresa )
+        @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) override val id: Long = -1,
+        val userName: String = "sin nombre", val password: String = "sin pass"): Entidad<Long>
