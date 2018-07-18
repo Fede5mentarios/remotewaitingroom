@@ -8,7 +8,10 @@ import com.federico.d.bernst.controller.service.LoginService
 import com.federico.d.bernst.excepcion.FailAuthException
 import com.federico.d.bernst.koin.persistenseModule
 import com.federico.d.bernst.koin.serviceModule
+import com.federico.d.bernst.security.ClientSession
+import com.federico.d.bernst.security.GuestSession
 import com.federico.d.bernst.security.JWTAuthClass
+import com.federico.d.bernst.security.UserSession
 import com.federico.d.bernst.view.homeView
 import io.ktor.application.Application
 import io.ktor.application.ApplicationCall
@@ -31,6 +34,8 @@ import io.ktor.response.respond
 import io.ktor.response.respondText
 import io.ktor.routing.get
 import io.ktor.routing.routing
+import io.ktor.sessions.Sessions
+import io.ktor.sessions.cookie
 import kotlinx.css.CSSBuilder
 import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.FlowOrMetaDataContent
@@ -49,18 +54,25 @@ fun Application.module() {
     //	Features
     install(Authentication) {
         jwt {
+            realm = jwtAuthClass.realm
             verifier(jwtAuthClass.verifier)
             validate {
                 UserIdPrincipal(it.payload.getClaim(JWTAuthClass.claimName).asString())
             }
         }
     }
+    install(Sessions) {
+        cookie<ClientSession>(ClientSession.sessionName) // install a cookie stateless session
+        cookie<GuestSession>(GuestSession.sessionName) // install a cookie stateless session
+        cookie<UserSession>(UserSession.sessionName) // install a cookie stateless session
+    }
     install(StatusPages) {
         exception<RuntimeException> { exception ->
+            exception.printStackTrace()
             call.respond(HttpStatusCode.InternalServerError, mapOf("error" to exception.message))
         }
         exception<FailAuthException> { exception ->
-            call.respond(HttpStatusCode.Unauthorized, LoginResponse(mensaje = LoginResponse.textOnError, exception =  exception.message))
+            call.respond(HttpStatusCode.Unauthorized, LoginResponse(mensaje = LoginResponse.textOnError, exception = exception.message))
         }
     }
     install(CallLogging)

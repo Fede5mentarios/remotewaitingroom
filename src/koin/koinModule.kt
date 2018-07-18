@@ -15,9 +15,9 @@ import javax.persistence.Persistence
 
 
 val serviceModule = applicationContext {
-    bean { jwtAuthClass }
+    bean { JWTAuthClass.instance }
     bean { HomeServiceImpl(get()) as HomeService }
-    bean { LoginServiceImpl(get(),get()) as LoginService }
+    bean { LoginServiceImpl(get(), get()) as LoginService }
 }
 
 val persistenseModule = applicationContext {
@@ -26,7 +26,6 @@ val persistenseModule = applicationContext {
     bean { UsuarioDAOImpl(get()) as UsuarioDAO }
 }
 
-val jwtAuthClass = JWTAuthClass("my-super-secret-for-jwt")
 
 val entityManager: EntityManager
     get() = Persistence.createEntityManagerFactory("remotewr").createEntityManager()
