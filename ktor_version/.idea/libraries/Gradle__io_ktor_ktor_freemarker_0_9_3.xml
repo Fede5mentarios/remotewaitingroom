@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: io.ktor:ktor-freemarker:0.9.3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-freemarker/0.9.3/288334563c5f0a88c752fd730b6e7b3bf9b8bd8/ktor-freemarker-0.9.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-freemarker/0.9.3/e8b661c4bb17cbb35c1be70a8cc773152172e9f4/ktor-freemarker-0.9.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
