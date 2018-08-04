@@ -1,3 +1,3 @@
-package com.federico.d.bernst.model
+package com.federico.d.bernst.remotewaitingroom.model
 
 interface Historico

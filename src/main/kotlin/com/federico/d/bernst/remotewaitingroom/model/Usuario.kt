@@ -9,14 +9,15 @@ data class Usuario(
         val userName: String = "sin nombre",
         val password: String = "sin pass",
         val descipcion: String = "Sin Descripcion",
-        val rol: Rol = Rol(),
+        @ManyToOne val rol: Rol = Rol(),
         val permisos: Array<Permiso> = emptyArray()) : Entidad<Long> {
 
     override fun equals(other: Any?) = this === other || (javaClass == other?.javaClass && id == (other as Usuario).id)
     override fun hashCode() = id.hashCode()
 }
 
-data class Rol(val nombre: String = Rol.DEFAULT, val orden: Int = 2, val asignable: Boolean = true) {
+@Entity
+data class Rol(@Id val nombre: String = Rol.DEFAULT, val orden: Int = 2, val asignable: Boolean = true) {
     companion object {
         val DEFAULT = "DEFAULT"
         val ADMIN = "ADMIN"

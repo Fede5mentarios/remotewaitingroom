@@ -1,6 +1,6 @@
 package com.federico.d.bernst.remotewaitingroom.model
 
-import com.federico.d.bernst.provider.ConfiguracionDAO
+import com.federico.d.bernst.remotewaitingroom.persistence.ConfiguracionRepository
 import com.google.gson.Gson
 import java.sql.Time
 import java.util.*
@@ -10,7 +10,7 @@ abstract class Configurable : Entidad<Long> {
     abstract val tipoEntidad: TipoEntidad
     abstract val padre: Entidad<Long>?
 
-    protected fun configuracionDe(key: String, dao: ConfiguracionDAO): Optional<Configuracion> {
+    protected fun configuracionDe(key: String, dao: ConfiguracionRepository): Optional<Configuracion> {
         return dao.findById(PKConfig(tipoEntidad, id, key))
                 .flatMap {
                     if (it == null && tipoEntidad.next != null) {
@@ -21,7 +21,7 @@ abstract class Configurable : Entidad<Long> {
                 }
     }
 
-    public fun getEntregaTurnosInicio(dao: ConfiguracionDAO): Optional<Time> {
+    public fun getEntregaTurnosInicio(dao: ConfiguracionRepository): Optional<Time> {
         return configuracionDe("TiempoPromedioEspera", dao)
                 .map {
                     if (it != null) {
@@ -32,7 +32,7 @@ abstract class Configurable : Entidad<Long> {
                 }
     }
 
-    public fun getEntregaTurnosFin(dao: ConfiguracionDAO): Optional<Time> {
+    public fun getEntregaTurnosFin(dao: ConfiguracionRepository): Optional<Time> {
         return configuracionDe("EntregaTurnosInicio", dao)
                 .map {
                     if (it != null) {
@@ -43,7 +43,7 @@ abstract class Configurable : Entidad<Long> {
                 }
     }
 
-    public fun getDiasAtencion(dao: ConfiguracionDAO): Optional<Array<Int>> {
+    public fun getDiasAtencion(dao: ConfiguracionRepository): Optional<Array<Int>> {
         return configuracionDe("DiasAtencion", dao)
                 .map {
                     if (it != null) {
@@ -54,7 +54,7 @@ abstract class Configurable : Entidad<Long> {
                 }
     }
 
-    public fun getHoraDeLimpiezaTurnos(dao: ConfiguracionDAO): Optional<Time> {
+    public fun getHoraDeLimpiezaTurnos(dao: ConfiguracionRepository): Optional<Time> {
         return configuracionDe("HoraDeLimpiezaTurnos", dao)
                 .map {
                     if (it != null) {
@@ -65,7 +65,7 @@ abstract class Configurable : Entidad<Long> {
                 }
     }
 
-    public fun getDiasLimpiezaTurnos(dao: ConfiguracionDAO): Optional<Array<Int>> {
+    public fun getDiasLimpiezaTurnos(dao: ConfiguracionRepository): Optional<Array<Int>> {
         return configuracionDe("DiasLimpiezaTurnos", dao)
                 .map {
                     if (it != null) {
@@ -76,7 +76,7 @@ abstract class Configurable : Entidad<Long> {
                 }
     }
 
-    public fun getTurnosEntregables(dao: ConfiguracionDAO): Optional<Int> {
+    public fun getTurnosEntregables(dao: ConfiguracionRepository): Optional<Int> {
         return configuracionDe("TurnosEntregables", dao)
                 .map {
                     if (it != null) {
@@ -87,7 +87,7 @@ abstract class Configurable : Entidad<Long> {
                 }
     }
 
-    public fun getTurnosEnAntencion(dao: ConfiguracionDAO): Int {
+    public fun getTurnosEnAntencion(dao: ConfiguracionRepository): Int {
         return configuracionDe("TurnosEnAntencion", dao)
                 .map {
                     if (it != null) {

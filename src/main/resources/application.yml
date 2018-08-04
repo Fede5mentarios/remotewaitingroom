@@ -4,7 +4,7 @@ spring:
             - local
         include: common
   datasource:
-    url: jdbc:postgresql://localhost:5432/remotewaitingroom
+    url: jdbc:postgresql://localhost:5432/remotewr
     username: postgres
     password: postgres
     platform: POSTGRESQL
@@ -19,7 +19,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
         connection.pool_size: 10
         ## create-drop dropea al cierre del session factory de hibernate. create solo dropea al iniciar
-        ddl-auto: validate
+        ddl-auto: create
         # Para debugear el log de hibernate en desarrollo, en prod se debería sacar o va a generar mucho ruido en la consola
         generate_statistics: false
         format_sql: true
