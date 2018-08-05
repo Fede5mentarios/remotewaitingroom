@@ -8,11 +8,13 @@ import javax.persistence.*
 @Table
 data class Empresa(
         @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) override val id: Long = -1,
-        @UniqueElements val nombre: String = "sin nombre",
+        @UniqueElements val nombreCompleto: String = "sin nombre",
+        val nombreFantasia: String? = null,
         @OneToMany(mappedBy = "empresa") @OrderColumn var datosExtra: Array<DatoExtra> = emptyArray(),
         @OneToOne val owner: Usuario = Usuario(),
         @Temporal(TemporalType.TIMESTAMP) val fechaModificacion: Calendar = Calendar.getInstance(),
         @Temporal(TemporalType.TIMESTAMP) val fechaCreacion: Calendar = Calendar.getInstance(),
+        val deleted: Boolean = false,
         override val tipoEntidad: TipoEntidad = TipoEntidad.EMPRESA,
         @Transient override val padre: Entidad<Long>? = null) : Configurable() {
 

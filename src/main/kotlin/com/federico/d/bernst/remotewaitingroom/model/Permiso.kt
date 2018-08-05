@@ -3,9 +3,9 @@ package com.federico.d.bernst.remotewaitingroom.model
 import javax.persistence.*
 
 @Entity
-@Table
 data class Permiso(
         @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) override val id: Long = -1,
+        @ManyToOne val usuario: Usuario = Usuario(),
         val tipoAcceso: TipoAcceso = TipoAcceso.NONE,
         val codEntidad: Long = -1) : Entidad<Long>
 
