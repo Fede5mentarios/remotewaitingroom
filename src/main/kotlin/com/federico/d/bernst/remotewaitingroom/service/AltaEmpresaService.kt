@@ -16,9 +16,9 @@ import java.util.*
 import java.util.stream.Collectors
 
 @Service
-class AltaService(@Autowired val usuarioRepository: UsuarioRepository,
-                  @Autowired val empresaRepository: EmpresaRepository,
-                  @Autowired val rolRepository: RolRepository) {
+class AltaEmpresaService(@Autowired val usuarioRepository: UsuarioRepository,
+                         @Autowired val empresaRepository: EmpresaRepository,
+                         @Autowired val rolRepository: RolRepository) {
 
     fun altaUsuarioOwner(ownerReceived: OwnerReceived): AltaUsuarioResponse {
         if (usuarioRepository.findByUnique(ownerReceived.username).isPresent)

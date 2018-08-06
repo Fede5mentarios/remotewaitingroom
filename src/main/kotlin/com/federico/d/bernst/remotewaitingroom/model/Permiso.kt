@@ -9,4 +9,4 @@ data class Permiso(
         val tipoAcceso: TipoAcceso = TipoAcceso.NONE,
         val codEntidad: Long = -1) : Entidad<Long>
 
-enum class TipoAcceso { NONE, EMPRESA, SALA, HISTORICO_EMPRESA, HISTORICO_SALA, ADMIN }
+enum class TipoAcceso { NONE, EMPRESA, SALA, USUARIO, HISTORICO_EMPRESA, HISTORICO_SALA, ADMIN }
